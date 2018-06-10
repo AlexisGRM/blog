@@ -3,7 +3,7 @@
 @section('primero')
 
 <h1 class="header center orange-text">Productos</h1>
-
+<a href="/products/create">Create</a><br>
 
 <table class="table">
 	<tr>

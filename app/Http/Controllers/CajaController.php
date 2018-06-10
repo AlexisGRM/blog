@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Planta;
 use App\caja;
+use App\cliente;
 use Illuminate\Http\Request;
 
-class PlantaController extends Controller
+class CajaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class PlantaController extends Controller
     public function index()
     {
         //
-        $plantas = planta::all();
-        return view('plantas.index',['plantas'=>$plantas]);
+        $cajas = caja::all();
+        return view('cajas.index',['cajas'=>$cajas]);
     }
 
     /**
@@ -28,9 +28,8 @@ class PlantaController extends Controller
     public function create()
     {
         //
-         $caja = caja::pluck('description','id');
-
-        return view('plantas.create',['caja'=>$caja]);
+        $clientes = cliente::pluck('nombre','id');
+        return view('cajas.create',['clientes'=>$clientes]);
     }
 
     /**
@@ -42,65 +41,64 @@ class PlantaController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $request->all();
-        planta::create($data);
+         $data = $request->all();
+        caja::create($data);
 
-        return redirect('plantas');
+        return redirect('cajas');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Planta  $planta
+     * @param  \App\caja  $caja
      * @return \Illuminate\Http\Response
      */
-    public function show(Planta $planta)
+    public function show(caja $caja)
     {
         //
-
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Planta  $planta
+     * @param  \App\caja  $caja
      * @return \Illuminate\Http\Response
      */
-    public function edit(Planta $planta)
+    public function edit(caja $caja)
     {
         //
-        $caja = caja::pluck('description','id');
-        $planta = planta::find($planta->id);
-        return view('plantas.edit',['planta' => $planta,'caja'=>$caja]);
+        $clientes = cliente::pluck('nombre','id');
+        $caja = caja::find($caja->id);
+        return view('cajas.edit',['caja' => $caja,'clientes'=>$clientes]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Planta  $planta
+     * @param  \App\caja  $caja
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Planta $planta)
+    public function update(Request $request, caja $caja)
     {
         //
-        $vplanta = planta::find($planta->id);
+        $vcaja = caja::find($caja->id);
         $data = $request->all();
-        $vplanta->update($data);
-        return redirect('plantas');
+        $vcaja->update($data);
+        return redirect('cajas');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Planta  $planta
+     * @param  \App\caja  $caja
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Planta $planta)
+    public function destroy(caja $caja)
     {
         //
-        $vplanta = planta::find($planta->id);
-        $vplanta->destroy($planta->id);
-        return redirect('plantas');
+        $vcaja = caja::find($caja->id);
+        $vcaja->destroy($caja->id);
+        return redirect('cajas');
     }
 }

@@ -67,3 +67,5 @@ Route::resource('products', 'ProductController');
 Route::resource('plantas', 'PlantaController');
 
 Route::resource('clientes', 'ClienteController');
+
+Route::resource('cajas', 'CajaController');

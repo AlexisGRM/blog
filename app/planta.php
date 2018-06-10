@@ -9,6 +9,10 @@ class planta extends Model
     //
     protected $fillable = [
         'temperatura',
+        'humedadAire',
+        'humedadTierra',
+        'fechaDato',
+        'caja_id',
     ];
     
 }

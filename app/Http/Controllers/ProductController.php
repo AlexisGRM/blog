@@ -68,6 +68,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
+        $categories = Category::pluck('description','id');
+        $product = Product::find($product->id);
+        return view('products.edit',['product' => $product,'categories'=>$categories]);
     }
 
     /**
@@ -80,6 +83,10 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $vproduct = Product::find($product->id);
+        $data = $request->all();
+        $vproduct->update($data);
+        return redirect('products');
     }
 
     /**
@@ -91,5 +98,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        $vproduct = Product::find($product->id);
+        $vproduct->destroy($product->id);
+        return redirect('products');
     }
 }
