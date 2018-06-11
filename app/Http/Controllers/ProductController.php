@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -15,8 +16,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        $products = Product::all();
+        //$products = Product::all();
+        $products = DB::table('products')
+        ->join('categories','products.category_id','=','categories.id')
+        ->select('products.*','categories.description as cdesc')
+        ->get();
+        
         return view('products.index',['products'=>$products]);
     }
 
@@ -27,9 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
-        $categories = Category::pluck('description','id');
-
+      $categories = Category::pluck('description','id');
         return view('products.create',['categories'=>$categories]);
     }
 
@@ -41,11 +44,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $data = $request->all();
-        Product::create($data);
+      //Guarda la informacion
+      $data =  $request->all();
+      Product::create($data);
 
-        return redirect('products');
+      return redirect('products');
     }
 
     /**
@@ -67,10 +70,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
-        $categories = Category::pluck('description','id');
-        $product = Product::find($product->id);
-        return view('products.edit',['product' => $product,'categories'=>$categories]);
+      $product = Product::find($product -> id);
+      $categories = Category::pluck('description','id');
+      return view('products/edit',['product'=>$product,'categories'=>$categories]);
     }
 
     /**
@@ -86,6 +88,7 @@ class ProductController extends Controller
         $vproduct = Product::find($product->id);
         $data = $request->all();
         $vproduct->update($data);
+
         return redirect('products');
     }
 
@@ -97,9 +100,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        //Eliminar un registro de la base de datos.
         $vproduct = Product::find($product->id);
         $vproduct->destroy($product->id);
         return redirect('products');
+
     }
 }

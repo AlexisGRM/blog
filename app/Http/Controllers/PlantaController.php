@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Planta;
 use App\caja;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class PlantaController extends Controller
 {
     /**
@@ -15,8 +15,11 @@ class PlantaController extends Controller
      */
     public function index()
     {
-        //
-        $plantas = planta::all();
+        //$plantas = planta::all();
+        $plantas = DB::table('plantas')
+        ->join('cajas','plantas.id','=','cajas.id')
+        ->select('plantas.*','cajas.description as cdesc')
+        ->get();
         return view('plantas.index',['plantas'=>$plantas]);
     }
 

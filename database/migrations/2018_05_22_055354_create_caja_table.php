@@ -13,7 +13,7 @@ class CreateCajaTable extends Migration
      */
     public function up()
     {
-        Schema::create('caja', function (Blueprint $table) {
+        Schema::create('cajas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
             $table->unsignedInteger('cliente_id');

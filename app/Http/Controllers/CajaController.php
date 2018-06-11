@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\caja;
 use App\cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CajaController extends Controller
 {
@@ -15,8 +16,11 @@ class CajaController extends Controller
      */
     public function index()
     {
-        //
-        $cajas = caja::all();
+      $cajas = DB::table('cajas')
+      ->join('clientes','cajas.cliente_id','=','clientes.id')
+      ->select('cajas.*','clientes.nombre as cdesc','clientes.apeMaterno as cdescc')
+      ->get();
+
         return view('cajas.index',['cajas'=>$cajas]);
     }
 

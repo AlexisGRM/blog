@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -14,9 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //Mostrar todos los regitros
+        //Mostrar todos los registros
         $categories = Category::all();
-        return view('/categories.index',['categories'=>$categories]);
+        return view('categories.index',['categories'=>$categories]);
+
     }
 
     /**
@@ -26,10 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //crear formulario para crear una categoria
-        return view("categories.create");
-
-    } 
+        //Mostrar el formulario para crear una nueva categoria
+        return view('categories.create');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,9 +39,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //Guardar la informacion
-        $data = $request->all();
+        //Guarda la informacion
+        $data =  $request ->all();
         Category::create($data);
+
         return redirect('categories');
     }
 
@@ -53,7 +54,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //Mostrar informacion especifica
+        //Mostrar informacion especifica sobre una categoria
     }
 
     /**
@@ -64,9 +65,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //Mostrar los datos en una vista que deseamos actualizar
+        //Mostrar los datos en una vista,que deseamos actualizar
         $category = Category::find($category->id);
-        return view('categories.edit',['category' => $category]);
+        return view('categories.edit',['category'=>$category]);
     }
 
     /**
@@ -78,12 +79,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //Realizar los cambion en una base de datos, basado en la actualizacion
+        //Realizar cambios de la base de datos.
         $vcategory = Category::find($category->id);
         $data = $request->all();
         $vcategory->update($data);
+
         return redirect('categories');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -93,9 +96,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //eliminar un registro de la base de datos
+        //Eliminar un registro de la base de datos.
         $vcategory = Category::find($category->id);
         $vcategory->destroy($category->id);
         return redirect('categories');
+
     }
 }

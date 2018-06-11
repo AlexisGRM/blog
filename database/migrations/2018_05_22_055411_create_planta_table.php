@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +13,7 @@ class CreatePlantaTable extends Migration
      */
     public function up()
     {
-        Schema::create('planta', function (Blueprint $table) {
+        Schema::create('plantas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('temperatura');
             $table->string('humedadAire');
