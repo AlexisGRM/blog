@@ -14,26 +14,19 @@
     }
   }
 </script>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
     <a class="waves-effect waves-light btn" href="/products/create">Crear</a>
-    <table>
+    <table class="striped centered">
       <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Descripcion</th>
-        <th>Categoria</th>
-        <th>Pricio</th>
-        <th>Acciones</th>
+        <th class="center">ID</th>
+        <th class="center">Nombre</th>
+        <th class="center">Descripcion</th>
+        <th class="center">Categoria</th>
+        <th class="center">Precio</th>
+        <th class="center">Acciones</th>
       </tr>
       @foreach($products as $product)
       <tr>
-        <td>{{ $product->id }}</td>s
+        <td><a href="{!! '/products/'.$product->id !!}">{{$product -> id}}</a></td>
         <td>{{ $product->name }}</td>
         <td>{{ $product->description }}</td>
         <td>{{ $product->cdesc }}</td>
@@ -46,7 +39,8 @@
        </td>
       </tr>
       @endforeach
-    </table>
+      </table>
+      {{$products->links()}}
   </body>
 </html>
 @endsection

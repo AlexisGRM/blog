@@ -20,8 +20,8 @@ class ProductController extends Controller
         $products = DB::table('products')
         ->join('categories','products.category_id','=','categories.id')
         ->select('products.*','categories.description as cdesc')
-        ->get();
-        
+        -> paginate(1);
+
         return view('products.index',['products'=>$products]);
     }
 
@@ -59,7 +59,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+       $product = Product::find($product -> id);
+       return view('products.show',['product'=>$product]);
     }
 
     /**
